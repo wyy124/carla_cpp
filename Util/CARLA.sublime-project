@@ -6,47 +6,47 @@
             "path":"..",
             // 要排除的文件模式列表
             "file_exclude_patterns":[
-                "*.VC.db",
-                "*.VC.opendb",
-                "*.gdb_history",
-                "*.kdev4",
-                "*.pri",
-                "*.pro",
-                "*.py[cod]",
-                "*.sln",
-                "*.stackdump",
-                "*.sublime-workspace",
-                "*.uasset",
-                "*.umap",
-                "*.workspace",
-                "*CodeCompletionFolders.txt",
-                "*CodeLitePreProcessor.txt",
-                ".tags*",
-                "core"
+                "*.VC.db",//排除以.VC.db为后缀的文件，可能是某种特定的数据库相关文件（比如Visual C++相关的数据库文件）
+                "*.VC.opendb",// 同理，排除此类后缀的文件
+                "*.gdb_history",// 可能是与GDB调试相关的历史记录文件
+                "*.kdev4",// 或许是和KDevelop 4相关的文件
+                "*.pri",// 可能是某种项目相关的配置文件（比如Qt项目中的.pri文件）
+                "*.pro",// 常见于Qt项目等的项目配置文件，这里将其排除
+                "*.py[cod]",// 排除以.pyc、.pyo、.pyd等类似后缀的Python编译后的文件等
+                "*.sln",// 一般是Visual Studio解决方案文件，在此项目中被排除
+                "*.stackdump",// 可能是程序崩溃等产生的栈信息转储文件
+                "*.sublime-workspace",// 与Sublime Text工作区相关的文件，这里不纳入项目
+                "*.uasset",// 可能是某种游戏资源文件（比如在Unreal Engine项目中）
+                "*.umap",// 同样可能是游戏相关地图等资源文件（常用于Unreal Engine项目）
+                "*.workspace",// 通用的工作区相关文件被排除
+                "*CodeCompletionFolders.txt",// 与代码自动补全相关的文件夹记录文件
+                "*CodeLitePreProcessor.txt",// 也许是和CodeLite编辑器预处理相关的文件
+                ".tags*",// 可能是代码标签相关文件
+                "core" // 直接排除名为"core"的文件
             ],
             // 要排除的文件夹模式列表
             "folder_exclude_patterns":[
-                "*.egg-info",
-                ".clang",
-                ".codelite",
-                ".kdev4",
-                ".vs",
-                ".vscode",
-                "Binaries",
-                "Build",
-                "DerivedDataCache",
-                "Dist",
-                "Doxygen",
-                "Examples/CppClient/*",
-                "Intermediate",
-                "PythonAPI/carla/build",
-                "PythonAPI/carla/dependencies",
-                "PythonAPI/carla/dist",
-                "Saved",
-                "Unreal/CarlaUE4/Content/Carla/*",
-                "Unreal/CarlaUE4/Plugins/Carla/CarlaDependencies",
-                "__pycache__",
-                "_site"
+                "*.egg-info",// 是Python项目中与包相关的元信息文件夹，通常在构建、安装Python包时生成，这里排除
+                ".clang",// 可能是和Clang编译器相关的配置或临时文件夹
+                ".codelite",// 与CodeLite编辑器相关的文件夹被排除
+                ".kdev4",// 如前面提到，和KDevelop 4相关的文件夹排除
+                ".vs",// 一般是Visual Studio相关的项目配置、临时文件等所在文件夹，排除
+                ".vscode",// 与Visual Studio Code编辑器相关的配置文件夹排除
+                "Binaries",// 通常存放编译生成的二进制文件的文件夹，这里不纳入项目
+                "Build",// 构建过程相关的文件夹排除，里面可能包含中间构建产物等
+                "DerivedDataCache",// 可能是存放衍生数据缓存的文件夹
+                "Dist",// 常用来存放项目最终分发文件的文件夹，此处排除
+                "Doxygen",// 如果项目使用Doxygen生成文档，该文件夹存放相关文档相关文件，这里排除
+                "Examples/CppClient/*",// 排除Examples目录下的CppClient文件夹及其内部所有内容
+                "Intermediate",// 一般是构建等过程中产生的中间文件所在文件夹，予以排除
+                "PythonAPI/carla/build",// 具体到PythonAPI下的carla模块中的build文件夹排除，可能是该模块构建相关临时文件存放处
+                "PythonAPI/carla/dependencies",// 同理，该模块的依赖相关文件夹排除
+                "PythonAPI/carla/dist",// 模块的分发相关文件夹排除
+                "Saved",// 可能是保存项目运行相关状态等信息的文件夹，排除
+                "Unreal/CarlaUE4/Content/Carla/*",// 在Unreal项目特定目录下的Carla相关内容文件夹排除，可能是游戏内容相关资源
+                "Unreal/CarlaUE4/Plugins/Carla/CarlaDependencies",// Unreal项目中Carla插件的依赖相关文件夹排除
+                "__pycache__",// Python的字节码缓存文件夹，通常不需要纳入项目管理等，排除
+                "_site"// 不清楚具体用途，但按配置在此排除的文件夹
             ]
         }
     ],
@@ -279,17 +279,17 @@
         {
             "name":"CARLA - Pylint this file",
             "selector":"source.python",
-            "working_dir":"${project_path}/..",
-            "file_regex":"^([^\n:]*):([0-9]+):?([0-9]+)?:? (.*)$",
-            "syntax":"Packages/Makefile/Make Output.sublime-syntax",
+            "working_dir":"${project_path}/..",// 工作目录相关设置
+            "file_regex":"^([^\n:]*):([0-9]+):?([0-9]+)?:? (.*)$",// 错误信息匹配正则表达式
+            "syntax":"Packages/Makefile/Make Output.sublime-syntax",// 语法相关定义
             "linux":{
                 // Linux 下的 shell 命令，使用 Pylint 对当前文件进行检查
                 "shell_cmd":"pylint -rn --msg-template='{path}:{line}:{column}: {msg_id}: {msg}' --disable=R,C --rcfile=PythonAPI/.pylintrc ${file}"
             }
         },
         {
-            "name":"CARLA - Prettify this file",
-            "working_dir":"${project_path}/..",
+            "name":"CARLA - Prettify this file", // 对PythonAPI进行全面检查的任务名称
+            "working_dir":"${project_path}/..",// 工作目录相关配置
             "file_regex":"^([^:]*):([0-9]+):?([0-9]+)?:? (.*)$",
             "syntax":"Packages/Makefile/Make Output.sublime-syntax",
             "linux":{
